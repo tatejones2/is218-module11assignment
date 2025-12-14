@@ -9,23 +9,42 @@
 
 This project includes comprehensive unit and integration tests for the Factory Pattern implementation, Pydantic schema validation, and database operations.
 
+### Prerequisites for Local Testing
+
+Before running tests locally, ensure you have:
+```bash
+# Install Python 3.10+
+python3 --version
+
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate.bat # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
 ### Quick Test Commands
 
 ```bash
 # Run all tests
 pytest tests/ -v
 
-# Run unit tests only
+# Run unit tests only (Factory Pattern tests)
 pytest tests/unit/ -v
 
-# Run integration tests only
+# Run integration tests only (Database + Schema validation)
 pytest tests/integration/ -v
 
-# Run with coverage report
+# Run with coverage report and HTML output
 pytest tests/ -v --cov=app --cov-report=html
 
 # Run specific test class
 pytest tests/unit/test_factory.py::TestAdditionCalculator -v
+
+# Run with detailed output
+pytest tests/ -vv --tb=short
 ```
 
 ### Test Coverage
@@ -33,16 +52,48 @@ pytest tests/unit/test_factory.py::TestAdditionCalculator -v
 - **Unit Tests**: 47 tests covering Factory Pattern and Calculator strategies
 - **Integration Tests**: 16 database tests + 40+ schema validation tests
 - **Total**: 99+ tests, all passing ✅
+- **Code Coverage**: 76% overall, 85%+ on critical modules
 
 For detailed test documentation, see [TESTING.md](TESTING.md).
 
 ### GitHub Actions CI/CD
 
 Tests automatically run on every push to the `main` branch. The workflow:
-- Sets up PostgreSQL service
-- Installs dependencies
-- Runs unit, integration, and E2E tests
-- Generates coverage reports
+- ✅ Sets up PostgreSQL service
+- ✅ Installs dependencies
+- ✅ Runs unit, integration, and E2E tests
+- ✅ Generates coverage reports
+- ✅ Builds Docker image
+- ✅ Runs security scan with Trivy
+- ✅ Pushes to Docker Hub
+
+### Docker Hub Repository
+
+The Docker image is automatically built and pushed to Docker Hub on every successful test run:
+
+**Docker Hub Link**: [tatejones2/is218-module11](https://hub.docker.com/r/tatejones2/is218-module11)
+
+#### Pull and Run from Docker Hub
+
+```bash
+# Pull the latest image
+docker pull tatejones2/is218-module11:latest
+
+# Run the container
+docker run -p 8000:8000 \
+  -e DATABASE_URL=postgresql://user:password@localhost:5432/myappdb \
+  tatejones2/is218-module11:latest
+```
+
+#### Using Tagged Versions
+
+```bash
+# Pull a specific version (by commit SHA)
+docker pull tatejones2/is218-module11:8893108
+
+# View all available tags
+docker search tatejones2/is218-module11
+```
 
 ---
 
