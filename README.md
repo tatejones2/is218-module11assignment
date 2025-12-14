@@ -1,19 +1,20 @@
 # IS218 Module 11 - Calculation API with Factory Pattern
 
-## 🔗 Repository & Docker
+## � Quick Links
 
-- **GitHub Repository**: [tatejones2/is218-module11assignment](https://github.com/tatejones2/is218-module11assignment)
-- **Docker Hub**: [kaw393939/601_module9](https://hub.docker.com/r/kaw393939/601_module9)
+- **GitHub Repository**: [tatejones2/is218-module11assignment](https://github.com/tatejones2/is218-module11assignment) (Your own code)
+- **Docker Hub Repository**: [tatejones2/is218-module11](https://hub.docker.com/r/tatejones2/is218-module11) (Auto-built on push)
 
-## 🧪 Running Tests
+---
 
-This project includes comprehensive unit and integration tests for the Factory Pattern implementation, Pydantic schema validation, and database operations.
+## 🧪 Running Tests Locally
 
-### Prerequisites for Local Testing
+### Prerequisites
 
-Before running tests locally, ensure you have:
+Before running tests, ensure you have Python 3.10+ installed:
+
 ```bash
-# Install Python 3.10+
+# Check Python version
 python3 --version
 
 # Create and activate virtual environment
@@ -25,16 +26,16 @@ venv\Scripts\activate.bat # Windows
 pip install -r requirements.txt
 ```
 
-### Quick Test Commands
+### Test Commands
 
 ```bash
 # Run all tests
 pytest tests/ -v
 
-# Run unit tests only (Factory Pattern tests)
+# Run unit tests only (Factory Pattern tests - 47 tests)
 pytest tests/unit/ -v
 
-# Run integration tests only (Database + Schema validation)
+# Run integration tests only (Database + Schema - 50+ tests)
 pytest tests/integration/ -v
 
 # Run with coverage report and HTML output
@@ -47,57 +48,66 @@ pytest tests/unit/test_factory.py::TestAdditionCalculator -v
 pytest tests/ -vv --tb=short
 ```
 
-### Test Coverage
+### Test Coverage Summary
 
 - **Unit Tests**: 47 tests covering Factory Pattern and Calculator strategies
-- **Integration Tests**: 16 database tests + 40+ schema validation tests
+- **Integration Tests**: 16 database persistence tests + 40+ schema validation tests  
 - **Total**: 99+ tests, all passing ✅
 - **Code Coverage**: 76% overall, 85%+ on critical modules
+- **Documentation**: See [TESTING.md](TESTING.md) for complete details
 
-For detailed test documentation, see [TESTING.md](TESTING.md).
+---
 
-### GitHub Actions CI/CD
+## 🐳 Using Docker
 
-Tests automatically run on every push to the `main` branch. The workflow:
-- ✅ Sets up PostgreSQL service
-- ✅ Installs dependencies
-- ✅ Runs unit, integration, and E2E tests
-- ✅ Generates coverage reports
-- ✅ Builds Docker image
-- ✅ Runs security scan with Trivy
-- ✅ Pushes to Docker Hub
+### Pull from Docker Hub
 
-### Docker Hub Repository
-
-The Docker image is automatically built and pushed to Docker Hub on every successful test run:
-
-**Docker Hub Link**: [tatejones2/is218-module11](https://hub.docker.com/r/tatejones2/is218-module11)
-
-#### Pull and Run from Docker Hub
+The Docker image is automatically built and pushed on every successful test run.
 
 ```bash
 # Pull the latest image
 docker pull tatejones2/is218-module11:latest
 
-# Run the container
+# Run the container with environment variables
 docker run -p 8000:8000 \
   -e DATABASE_URL=postgresql://user:password@localhost:5432/myappdb \
   tatejones2/is218-module11:latest
 ```
 
-#### Using Tagged Versions
+### Using Tagged Versions
 
 ```bash
 # Pull a specific version (by commit SHA)
-docker pull tatejones2/is218-module11:8893108
+docker pull tatejones2/is218-module11:e8f9240
 
 # View all available tags
 docker search tatejones2/is218-module11
 ```
 
+### Build Locally
+
+```bash
+# Build the image locally
+docker build -t is218-module11:latest .
+
+# Run locally built image
+docker run -p 8000:8000 -it is218-module11:latest
+```
+
 ---
 
-# 📦 Project Setup
+## 🔄 CI/CD Pipeline
+
+GitHub Actions automatically:
+- ✅ Runs all tests on every push
+- ✅ Generates coverage reports
+- ✅ Builds Docker image
+- ✅ Runs security scan with Trivy
+- ✅ Pushes to Docker Hub on success
+
+---
+
+## 📦 Project Setup
 
 ---
 
