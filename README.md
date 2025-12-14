@@ -1,3 +1,51 @@
+# IS218 Module 11 - Calculation API with Factory Pattern
+
+## 🔗 Repository & Docker
+
+- **GitHub Repository**: [tatejones2/is218-module11assignment](https://github.com/tatejones2/is218-module11assignment)
+- **Docker Hub**: [kaw393939/601_module9](https://hub.docker.com/r/kaw393939/601_module9)
+
+## 🧪 Running Tests
+
+This project includes comprehensive unit and integration tests for the Factory Pattern implementation, Pydantic schema validation, and database operations.
+
+### Quick Test Commands
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# Run unit tests only
+pytest tests/unit/ -v
+
+# Run integration tests only
+pytest tests/integration/ -v
+
+# Run with coverage report
+pytest tests/ -v --cov=app --cov-report=html
+
+# Run specific test class
+pytest tests/unit/test_factory.py::TestAdditionCalculator -v
+```
+
+### Test Coverage
+
+- **Unit Tests**: 47 tests covering Factory Pattern and Calculator strategies
+- **Integration Tests**: 16 database tests + 40+ schema validation tests
+- **Total**: 99+ tests, all passing ✅
+
+For detailed test documentation, see [TESTING.md](TESTING.md).
+
+### GitHub Actions CI/CD
+
+Tests automatically run on every push to the `main` branch. The workflow:
+- Sets up PostgreSQL service
+- Installs dependencies
+- Runs unit, integration, and E2E tests
+- Generates coverage reports
+
+---
+
 # 📦 Project Setup
 
 ---
@@ -198,6 +246,8 @@ docker run -it --rm <image-name>
 
 # 🚀 6. Running the Project
 
+## Local Development
+
 - **Without Docker**:
 
 ```bash
@@ -206,11 +256,25 @@ python main.py
 
 (or update this if the main script is different.)
 
-- **With Docker**:
+- **With Docker** (local build):
 
 ```bash
-docker run -it --rm <image-name>
+docker build -t is218-module11 .
+docker run -it --rm is218-module11
 ```
+
+## Using Docker Hub Image
+
+Pull and run the pre-built image from Docker Hub:
+
+```bash
+docker pull kaw393939/601_module9:latest
+docker run -it --rm kaw393939/601_module9:latest
+```
+
+## Running Tests
+
+See [🧪 Running Tests](#-running-tests) section at the top of this README.
 
 ---
 
